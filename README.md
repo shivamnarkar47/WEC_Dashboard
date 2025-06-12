@@ -1,54 +1,80 @@
-# React + TypeScript + Vite
+# WEC Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![WEC Dashboard Logo](https://github.com/shivamnarkar47/WEC_Dashboard/blob/main/assets/logo.png) <!-- Add logo if available -->
 
-Currently, two official plugins are available:
+A web-based dashboard for monitoring and analyzing data from the World Endurance Championship (WEC).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Overview
+The WEC Dashboard is a comprehensive visualization tool that provides real-time and historical data analysis for the World Endurance Championship. This application allows motorsport enthusiasts, teams, and analysts to track race statistics, driver performance, team standings, and other key metrics.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
+- Real-time race data visualization
+- Interactive charts and graphs
+- Lap time comparisons
+- Weather condition tracking
+- Customizable dashboard views
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Git
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shivamnarkar47/WEC_Dashboard.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd WEC_Dashboard
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+5. Open your browser and navigate to `http://localhost:5173`
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Usage
+1. Select a race from the dropdown menu
+2. Choose the metrics you want to analyze
+3. Interact with the charts by hovering, zooming, or clicking
+4. Save your favorite dashboard configurations
+5. Export data or visualizations as needed
+
+## Technologies Used
+- Frontend: React.js, D3.js, Chart.js
+- Backend: Node.js, Express
+- Database: MongoDB
+- Authentication: JWT
+- Deployment: Docker, AWS
+
+## Contributing
+We welcome contributions from the community! Please follow these steps:
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-branch`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature-branch`)
+5. Open a Pull Request
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+For questions or suggestions, please contact:
+- Shivam Narkar - shivamnarkar16@gmail.com
+- Project Link: [https://github.com/shivamnarkar47/WEC_Dashboard](https://github.com/shivamnarkar47/WEC_Dashboard)
