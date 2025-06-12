@@ -97,10 +97,12 @@ type Participant = {
   };
 };
 
-export function LiveTiming({ sessionId = "7617" }: { sessionId?: string }) {
+export function LiveTiming({ sessionId = "7622" }: { sessionId?: string }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [noLiveEvent, setNoLiveEvent] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const client = createClient({
@@ -109,8 +111,7 @@ export function LiveTiming({ sessionId = "7617" }: { sessionId?: string }) {
 
     const subscription = client.subscribe(
       {
-        query: `
-          subscription Session($sessionId: ID!, $filters: SessionParticipantsFilters, $realTime: Boolean!) {
+        query: `subscription Session($sessionId: ID!, $filters: SessionParticipantsFilters, $realTime: Boolean!) {
             session(sessionId: $sessionId) {
               id
               name
@@ -349,12 +350,14 @@ export function LiveTiming({ sessionId = "7617" }: { sessionId?: string }) {
           setError(err.message);
           setLoading(false);
         },
-        complete: () => console.log("Subscription complete"),
+        complete: () => {
+          console.log("Subscription complete");
+        },
       },
     );
 
     return () => subscription();
-  }, []);
+  });
 
   const formatLapTime = (ms: number) => {
     if (!ms) return "--:--.---";
@@ -378,6 +381,38 @@ export function LiveTiming({ sessionId = "7617" }: { sessionId?: string }) {
     }
     return participant.isOut ? "Out" : "Running";
   };
+  const [isComing, setIsComing] = useState(false);
+  if (isComing) {
+    return (
+      <Card className="bg-background">
+        <CardHeader>
+          <CardTitle className="text-center text-4xl text-foreground">
+            Coming Soon.
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex justify-center ">
+          <Icons.alert className="text-foreground" />
+          <p className="text-foreground ml-4">Stay tuned for more updates</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (noLiveEvent) {
+    return (
+      <Card className="bg-background">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl text-foreground">
+            No live events scheduled currently
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex justify-center items-center gap-2">
+          <Icons.clock className="text-foreground" />
+          <p className="text-foreground">Please check back later</p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (loading) {
     return (
@@ -471,13 +506,14 @@ export function LiveTiming({ sessionId = "7617" }: { sessionId?: string }) {
                     <TableCell>{participant.position}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <span className="font-medium">
+                        <span className={`font-medium`}>
                           {participant.driver.firstName}{" "}
                           {participant.driver.lastName}
                         </span>
                         <Badge
                           variant="outline"
                           className="px-1.5 py-0.5 text-xs"
+                          style={{ color: `${participant.category.color}` }}
                         >
                           #{participant.number}
                         </Badge>

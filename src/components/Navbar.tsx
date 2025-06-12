@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { Icons } from "./icon";
+import { ModeToggle } from "./mode-toggle";
 
 export function Navbar() {
   const location = useLocation();
@@ -29,7 +30,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="border-b bg-blue-50">
+    <nav className="border-b bg-background">
       <div className="flex h-16 items-center justify-between  px-4">
         <div className="flex items-center gap-2">
           <Icons.racingHelmet className="h-6 w-6 text-primary" />
@@ -55,12 +56,8 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10">
-            <Icons.search className="h-4 w-4" />
-          </button>
-          <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-            <Icons.users className="h-4 w-4 mr-2" />
-            Sign In
+          <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium  transition-colors hover:text-background hover:bg-foreground border border-input h-10 w-10">
+            <ModeToggle />
           </button>
         </div>
       </div>

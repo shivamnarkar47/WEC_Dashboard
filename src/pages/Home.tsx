@@ -52,14 +52,11 @@ function Home() {
                             }
                             participants {
                               number
-
+                              hasSeenCheckeredFlag
                               driver {
                                 firstName
                                 lastName
-                                country {
-                                  name
-                                  isoCode2
-                                }
+
                               }
                               team {
                                 name
@@ -103,15 +100,17 @@ function Home() {
 
   const getSessionStatus = () => {
     if (!sessionData?.liveStatus) return "Not Started";
-    if (sessionData.liveStatus.hasChequeredFlag) return "Finished";
+    if (sessionData.liveStatus.isClosed) return "Completed"; // Changed from "Finished" to "Completed"
     if (sessionData.liveStatus.isSessionRunning) return "Running";
     if (sessionData.liveStatus.sessionStartTime) return "About to Start";
     return "Not Started";
   };
 
+  // Update the getParticipantStatus function to match
   const getParticipantStatus = (participant: any) => {
-    if (sessionData?.liveStatus?.hasChequeredFlag) {
-      return participant.hasSeenCheckeredFlag ? "Finished" : "DNF";
+    if (sessionData?.liveStatus?.isClosed) {
+      // Changed from hasChequeredFlag to isClosed
+      return participant.hasSeenCheckeredFlag ? "Completed" : "DNF"; // Changed from "Finished" to "Completed"
     }
     return sessionData?.liveStatus?.isSessionRunning
       ? "Running"
@@ -204,7 +203,6 @@ function Home() {
                       Pos
                     </TableHead>
                     <TableHead className="text-foreground">Driver</TableHead>
-                    <TableHead className="text-foreground">Country</TableHead>
                     <TableHead className="text-foreground">Team</TableHead>
                     <TableHead className="text-foreground">Status</TableHead>
                     <TableHead className="text-right text-foreground">
@@ -246,11 +244,7 @@ function Home() {
                             </Badge>
                           </div>
                         </TableCell>
-                        <TableCell className="text-foreground">
-                          {participant.driver?.country?.isoCode2
-                            ? country2flag(participant.driver.country?.isoCode2)
-                            : participant.driver?.country?.name}
-                        </TableCell>
+
                         <TableCell className="text-foreground">
                           {participant.team.name}
                         </TableCell>
@@ -263,7 +257,7 @@ function Home() {
                             }
                             className={
                               getParticipantStatus(participant) === "DNF"
-                                ? "bg-destructive/10 text-destructive-foreground border-destructive"
+                                ? "bg-destructive text-destructive-foreground border-destructive"
                                 : ""
                             }
                           >

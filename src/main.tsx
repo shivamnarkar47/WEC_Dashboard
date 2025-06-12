@@ -11,6 +11,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Index from "./pages/Root";
 import { LiveTiming } from "./pages/LiveTiming";
+import { Schedule } from "./pages/Schedule";
+import { RaceDialog } from "./components/RaceDialog";
 
 const rootRoute = createRootRoute({
   component: Index,
@@ -31,13 +33,20 @@ const aboutRoute = createRoute({
 const liveTimingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/livetiming",
-  component: LiveTiming,
+  component: RaceDialog,
+});
+
+const schedule = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/schedule",
+  component: Schedule,
 });
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   liveTimingRoute,
+  schedule,
 ]);
 
 const router = createRouter({ routeTree });
