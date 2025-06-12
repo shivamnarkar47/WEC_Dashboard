@@ -1,0 +1,9 @@
+import Home from "@/pages/Home";
+
+const Index = () => {
+  return <Home />;
+};
+
+export const Route = createFileRoute({
+  component: Index,
+});
