@@ -10,7 +10,6 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Index from "./pages/Root";
-import { LiveTiming } from "./pages/LiveTiming";
 import { Schedule } from "./pages/Schedule";
 import { RaceDialog } from "./components/RaceDialog";
 
